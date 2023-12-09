@@ -1,0 +1,33 @@
+This code demonstrates how to create a document processing and question-answering system using several Python libraries including openai, langchain, pinecone, and dotenv. Here's a breakdown of its main components and functionalities:
+
+Library Imports: The code begins by importing necessary libraries. openai is used for accessing OpenAI's APIs (like GPT-3), langchain provides tools for working with language models, and pinecone is for vector database operations. The dotenv library is used to load environment variables.
+
+Environment Variables: The .env file is loaded to securely access environment variables like the OpenAI API key.
+
+Reading PDF Documents:
+
+read_doc function: It takes a directory path and uses PyPDFDirectoryLoader from langchain to load PDF documents from that directory.
+Chunking Data:
+
+chunk_data function: This splits the text of the documents into smaller chunks using RecursiveCharacterTextSplitter. This is useful for processing large documents in parts.
+Creating Embeddings:
+
+Embeddings are created using OpenAI's language model. The API key is fetched from the environment variables, and embeddings are generated for a given query.
+Pinecone Vector Database Initialization:
+
+Initializes a Pinecone database with a specific API key and environment. This database is used for storing and retrieving vector embeddings.
+Indexing Documents:
+
+The documents are indexed in the Pinecone database for later retrieval.
+Cosine Similarity & Retrieval Function:
+
+retrive_query: A function to retrieve similar documents from the Pinecone database based on cosine similarity. It returns the top k similar documents for a given query.
+Question Answering with Langchain:
+
+A question-answering chain is loaded using langchain. This chain uses an OpenAI model (text-davinci-003) to process and answer questions.
+Retrieving Answers:
+
+retrive_answers: This function first retrieves relevant documents based on a query, then uses the question-answering chain to generate an answer from these documents.
+Executing the Question-Answering System:
+
+Finally, the system is put to use. A query is defined, and the retrive_answers function is called to get the answer to this query.
